@@ -42,6 +42,10 @@ This project is an implementation of an idea and is not optimized for speed or e
 
 At the moment, I don't have the computational resources to integrate into the world of GPUs and CPUs in C.
 
+--Added Custom Xor Filter to 8 bytes because this database does not need many elements and I think that false collisions is not so likely, 
+in the same way the false positives would be ignored in the script when comparing with the target, blake2 is used that is a hash efficient 
+and fast for this task and is slightly lighter than using the Patt_DB.txt.
+
 ---
 
 **Donate to:**
