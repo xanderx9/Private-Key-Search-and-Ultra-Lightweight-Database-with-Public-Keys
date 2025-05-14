@@ -1,4 +1,4 @@
-import secp256k1 as ice
+import secp256k1 
 import random
 import regex as re
 from bitarray import bitarray
@@ -48,15 +48,15 @@ def count_patterns(binary_bits, Rand, start_time):
                 if X in t:
                     Tb_in_t = int(t.split(", Tb: ")[1].split(",")[0])
                     pk = (Rand - total_bits + Tb_in_t)-len(pattern)
-                    pk_f = ice.scalar_multiplication(pk).hex()
-                    cpub = ice.to_cpub(pk_f)
+                    pk_f = scalar_multiplication(pk).hex()
+                    cpub = to_cpub(pk_f)
                     if cpub in Target_pub:
                         last_match_info = f"Rand: {Rand} Bi: {bits_between}, Pp: {pattern}, Tb: {total_bits}, T: {t.strip()}, pk: {pk}"
                   
     
     if last_match_info:
-        pk_f = ice.scalar_multiplication(pk).hex()
-        cpub = ice.to_cpub(pk_f) 
+        pk_f = scalar_multiplication(pk).hex()
+        cpub = to_cpub(pk_f) 
         elapsed_time = time.time() - start_time
         print("pk:", pk)
         print("cpub:", cpub)
@@ -70,14 +70,14 @@ def count_patterns(binary_bits, Rand, start_time):
 
 low_m = 100000
 sustract = 1
-sustract_pub = ice.scalar_multiplication(sustract)        
+sustract_pub = scalar_multiplication(sustract)        
 start_time = time.time()
 
 while True:
     
     Rand = random.randint(start, end)
-    pk = ice.scalar_multiplication(Rand)
-    res = ice.point_loop_subtraction(low_m, pk, sustract_pub)
+    pk = scalar_multiplication(Rand)
+    res = point_loop_subtraction(low_m, pk, sustract_pub)
     binary_bits = process_res(res, low_m)
     count_patterns(binary_bits, Rand, start_time)
     
